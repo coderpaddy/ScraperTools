@@ -23,6 +23,14 @@ def get_elems(*args):
     elems = soup.find_all(tag_type, {f"{id_type}": search_term})
     return elems
 
+def write_csv(csv_doc, data_dict):
+    fieldnames = [x.lower() for x in data_dict[1].keys()]
+    writer = csv.DictWriter(csv_doc, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for key in data_dict.keys():
+        writer.writerow(data_dict[key])
+
 
 if __name__ == "__main__":
     print("This is aimed to be a helper file. not to be used individucally")
