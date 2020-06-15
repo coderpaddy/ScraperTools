@@ -5,6 +5,8 @@ To aid in scraping websites.
 
 # Dependecies
 import requests
+import csv
+from datetime import date
 from bs4 import BeautifulSoup as BS
 
 
@@ -31,6 +33,31 @@ def write_csv(csv_doc, data_dict):
     for key in data_dict.keys():
         writer.writerow(data_dict[key])
 
+def convert_date_ws_ns(date):
+    """
+    Convert date from 'Jun 25th' to 25/06/YY
+    """
+    month_dict = {
+        "jan": "01",
+        "feb": "02",
+        "mar": "03",
+        "apr": "04",
+        "may": "05",
+        "jun": "06",
+        "jul": "07",
+        "aug": "08",
+        "sep": "09",
+        "oct": "10",
+        "nov": "11",
+        "dec": "12"
+    }
+    month_word, day_num = date.split(" ")
+    if len(day_num) == 4:
+        day_num = day_num[:2]
+    else:
+        day_num = f"0{day_num[:1]}"
+    month_num = month_dict[month_word.lower()]
+    return f"{day_num}/{month_num}/{TODAY.strftime('%Y')}"
 
 if __name__ == "__main__":
     print("This is aimed to be a helper file. not to be used individucally")
