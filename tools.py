@@ -33,7 +33,7 @@ def write_csv(csv_doc, data_dict):
     for key in data_dict.keys():
         writer.writerow(data_dict[key])
 
-def convert_date_ws_ns(date):
+def convert_date_ws_ns(_date):
     """
     Convert date from 'Jun 25th' to 25/06/YY
     """
@@ -51,13 +51,13 @@ def convert_date_ws_ns(date):
         "nov": "11",
         "dec": "12"
     }
-    month_word, day_num = date.split(" ")
+    month_word, day_num = _date.split(" ")
     if len(day_num) == 4:
         day_num = day_num[:2]
     else:
         day_num = f"0{day_num[:1]}"
     month_num = month_dict[month_word.lower()]
-    return f"{day_num}/{month_num}/{TODAY.strftime('%Y')}"
+    return f"{day_num}/{month_num}/{date.today().strftime('%Y')}"
 
 if __name__ == "__main__":
     print("This is aimed to be a helper file. not to be used individucally")
